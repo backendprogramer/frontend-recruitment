@@ -38,23 +38,27 @@ export default {
         type: Array,
         require: false,
         validator(value) {  //check input is valid
+            let result = true
             value.forEach(item => {
                 if(item.start && item.end) {
                     if(Number.isInteger(item.start) && Number.isInteger(item.end)) {
                         if(!(item.start >= 0 && item.start <=24 && item.end >= 0 && item.end <=24 && item.start < item.end)) {
                             console.error("error: start should be grater then end and both (start and end) grther or equal 0")
-                            return false
+                            result = false
+                            return
                         }
                     } else {
                         console.error("error: start and end should be a integer number")
-                        return false
+                        result = false
+                        return
                     }
                 } else {
                     console.error("error: the object should be contains start and end property")
-                    return false
+                    result = false
+                    return
                 }
             })
-            return true
+            return result
          },
        }
     },
